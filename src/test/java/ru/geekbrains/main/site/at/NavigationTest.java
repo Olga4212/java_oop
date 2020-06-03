@@ -1,52 +1,36 @@
 package ru.geekbrains.main.site.at;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ru.geekbrains.main.site.at.base.BaseTest;
 
+import java.util.stream.Stream;
+
 public class NavigationTest extends BaseTest {
 
-    @Test
-    void courses() {
-        gotoPage("courses");
-        checkTitle("Курсы");
-        checkElements();
+    static Stream<Arguments> navigationTestParameters() {
+        return Stream.of(
+                Arguments.of("courses", "Курсы"),
+                Arguments.of("events", "Вебинары"),
+                Arguments.of("topics", "Форум"),
+                Arguments.of("posts", "Блог"),
+                Arguments.of("tests", "Тесты"),
+                Arguments.of("career", "Карьера")
+        );
     }
 
-    @Test
-    void events() {
-        gotoPage("events");
-        checkTitle("Вебинары");
-        checkElements();
-    }
-
-    @Test
-    void topics() {
-        gotoPage("topics");
-        checkTitle("Форум");
-        checkElements();
-    }
-
-    @Test
-    void posts() {
-        gotoPage("posts");
-        checkTitle("Блог");
-        checkElements();
-    }
-
-    @Test
-    void tests() {
-        gotoPage("tests");
-        checkTitle("Тесты");
-        checkElements();
-    }
-
-    @Test
-    void career() {
-        gotoPage("career");
-        checkTitle("Карьера");
+    @DisplayName("Проверка навигации")
+    @ParameterizedTest
+    @MethodSource("navigationTestParameters")
+    void testNavigation(String path, String title) {
+        gotoPage(path);
+        checkTitle(title);
         checkElements();
     }
 

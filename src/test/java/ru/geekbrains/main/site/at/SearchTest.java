@@ -9,6 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ru.geekbrains.main.site.at.base.BaseTest;
 
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
 public class SearchTest extends BaseTest {
 //    Перейти на сайт https://geekbrains.ru/courses
 //    Нажать на кнопку Поиск
@@ -38,13 +42,13 @@ public class SearchTest extends BaseTest {
         WebElement tests = driver.findElement(By.xpath(".//header/h2[text()='Тесты']"));
         WebElement projectAndCompany = driver.findElement(By.xpath(".//header/h2[text()='Проекты и компании']"));
 
-        wait10second.until(ExpectedConditions.textToBePresentInElement(professions,"Профессии"));
-        wait10second.until(ExpectedConditions.textToBePresentInElement(courses,"Курсы"));
-        wait10second.until(ExpectedConditions.textToBePresentInElement(events,"Вебинары"));
-        wait10second.until(ExpectedConditions.textToBePresentInElement(blogs,"Блоги"));
-        wait10second.until(ExpectedConditions.textToBePresentInElement(forum,"Форум"));
-        wait10second.until(ExpectedConditions.textToBePresentInElement(tests,"Тесты"));
-        wait10second.until(ExpectedConditions.textToBePresentInElement(projectAndCompany,"Проекты и компании"));
+        wait10second.until(ExpectedConditions.textToBePresentInElement(professions, "Профессии"));
+        wait10second.until(ExpectedConditions.textToBePresentInElement(courses, "Курсы"));
+        wait10second.until(ExpectedConditions.textToBePresentInElement(events, "Вебинары"));
+        wait10second.until(ExpectedConditions.textToBePresentInElement(blogs, "Блоги"));
+        wait10second.until(ExpectedConditions.textToBePresentInElement(forum, "Форум"));
+        wait10second.until(ExpectedConditions.textToBePresentInElement(tests, "Тесты"));
+        wait10second.until(ExpectedConditions.textToBePresentInElement(projectAndCompany, "Проекты и компании"));
 
         ///
 
@@ -53,8 +57,7 @@ public class SearchTest extends BaseTest {
         WebElement courses_count = driver.findElement(By.cssSelector("a[data-tab=\"courses\"] span"));
         wait10second.until(innerHtmlIsGreater(courses_count, 15));
         WebElement webinars_count = driver.findElement(By.cssSelector("a[data-tab=\"webinars\"] span"));
-        wait10second.until(innerHtmlIsGreater(webinars_count, 180));
-        wait10second.until(innerHtmlIsLess(webinars_count, 300));
+        wait10second.until(innerHtmlIsBeetween(webinars_count, 180, 300));
         WebElement blogs_count = driver.findElement(By.cssSelector("a[data-tab=\"blogs\"] span"));
         wait10second.until(innerHtmlIsGreater(blogs_count, 300));
 
@@ -64,11 +67,9 @@ public class SearchTest extends BaseTest {
         wait10second.until(innerHtmlIsNotEquals(tests_count, 0));
 
         WebElement first_webinar = driver.findElement(By.cssSelector("a.event__title"));
-        wait10second.until(ExpectedConditions.textToBePresentInElement(first_webinar,"Java Junior. Что нужно знать для успешного собеседования?"));
+        wait10second.until(ExpectedConditions.textToBePresentInElement(first_webinar, "Java Junior. Что нужно знать для успешного собеседования?"));
 
         wait10second.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.company-items a[href=\"/career/682\"]")));
-
-
     }
 
     public static ExpectedCondition<Boolean> innerHtmlIsGreater(final WebElement element, final int value) {
@@ -76,7 +77,8 @@ public class SearchTest extends BaseTest {
             public Boolean apply(WebDriver driver) {
                 try {
                     String elementText = element.getAttribute("innerHTML");
-                    return Integer.parseInt(elementText) > value;
+                    assertThat(Integer.parseInt(elementText), greaterThan(value));
+                    return true;
                 } catch (StaleElementReferenceException var3) {
                     return null;
                 }
@@ -88,31 +90,38 @@ public class SearchTest extends BaseTest {
         };
     }
 
-    public static ExpectedCondition<Boolean> innerHtmlIsLess(final WebElement element, final int value) {
+    public static ExpectedCondition<Boolean> innerHtmlIsBeetween(final WebElement element, final int from, final int to) {
         return new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
                 try {
                     String elementText = element.getAttribute("innerHTML");
-                    return Integer.parseInt(elementText) < value;
+                    assertThat(Integer.parseInt(elementText), allOf(
+                            greaterThan(from),
+                            lessThan(to)
+                            )
+                    );
+                    return true;
                 } catch (StaleElementReferenceException var3) {
                     return null;
                 }
             }
 
             public String toString() {
-                return String.format("text of element ('%s') is less than %d", element, value);
+                return String.format("text of element ('%s') is between  %d and %d", element, from, to);
             }
         };
     }
-
-
 
     public static ExpectedCondition<Boolean> innerHtmlIsNotEquals(final WebElement element, final int value) {
         return new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
                 try {
                     String elementText = element.getAttribute("innerHTML");
-                    return Integer.parseInt(elementText) != value;
+                    assertThat(
+                            Integer.parseInt(elementText),
+                            not(comparesEqualTo(value))
+                    );
+                    return true;
                 } catch (StaleElementReferenceException var3) {
                     return null;
                 }
