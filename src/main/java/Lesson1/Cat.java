@@ -14,20 +14,21 @@ public class Cat implements CanJumpAndRun {
     @Override
     public boolean jump(int height) {
         if (height <= this.JumpMax) {
-            System.out.println("Кот " + name +" прыгнул на " + height);
+            System.out.println("Кот " + name + " прыгнул на " + height);
             return true;
         } else {
-            System.out.println("Кот " + name +" не смог прыгнуть на " + height);
+            System.out.println("Кот " + name + " не смог прыгнуть на " + height);
             return false;
         }
     }
+
     @Override
     public boolean run(int length) {
         if (length <= this.RunMax) {
-            System.out.println("Кот " + name +" пробежал на " + length);
+            System.out.println("Кот " + name + " пробежал на " + length);
             return true;
         } else {
-            System.out.println("Кот " + name +" не смог пробежать на " + length);
+            System.out.println("Кот " + name + " не смог пробежать на " + length);
             return false;
         }
     }

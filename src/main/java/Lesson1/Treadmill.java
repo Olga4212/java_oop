@@ -2,6 +2,7 @@ package Lesson1;
 
 public class Treadmill implements CanDo {
     int distance;
+
     public Treadmill(int distance) {
         this.distance = distance;
     }
