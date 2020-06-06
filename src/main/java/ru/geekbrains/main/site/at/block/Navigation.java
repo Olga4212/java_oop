@@ -29,9 +29,11 @@ public class Navigation {
     private WebElement buttonCareer;
 
     private WebDriver driver;
+    private HomePage homePage;
 
-    public Navigation(WebDriver driver) {
+    public Navigation(WebDriver driver, HomePage homePage) {
         this.driver = driver;
+        this.homePage = homePage;
         PageFactory.initElements(driver, this);
     }
 
@@ -65,6 +67,6 @@ public class Navigation {
                 throw new ButtonNotFoundException("Кнопка не найдена! Нет кнопки с именем: " + name);
             }
         }
-        return new HomePage(driver);
+        return homePage;
     }
 }

@@ -33,7 +33,7 @@ public class NavigationTest extends BaseTest {
     }
 
     @Description("Тесты которые проверяют функционал без Pop-UP")
-    @DisplayName("Нажатие на элемент навагации")
+    @DisplayName("Нажатие на элемент навигации")
     @ParameterizedTest(name = "{index} => Нажатие на: {0}")
     @MethodSource("stringProviderNotPopUp")
     public void checkNavigationNotPopUp(String name) {
@@ -43,7 +43,7 @@ public class NavigationTest extends BaseTest {
     }
 
     @Description("Тесты которые проверяют функционал Pop-UP")
-    @DisplayName("Нажатие на элемент навагации")
+    @DisplayName("Нажатие на элемент навигации")
     @ParameterizedTest(name = "{index} => Нажатие на: {0}")
     @MethodSource("stringProviderPopUp")
     public void checkNavigationPopUp(String name) {

@@ -27,8 +27,6 @@ public class BaseTest {
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 
-        driver.get("https://geekbrains.ru/career");
-
         wait10second = new WebDriverWait(driver, 10);
     }
 
