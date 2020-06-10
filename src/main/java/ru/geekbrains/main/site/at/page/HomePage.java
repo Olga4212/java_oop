@@ -1,5 +1,6 @@
 package ru.geekbrains.main.site.at.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,6 +61,7 @@ public class HomePage {
         return this;
     }
 
+    @Step("Проверка того, что авторизовались")
     public HomePage checkAuthorized() {
         wait10second.until(Conditions.exists(this.userAvatar));
         return this;

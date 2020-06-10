@@ -1,5 +1,6 @@
 package ru.geekbrains.main.site.at.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,7 @@ public class AuthorizationPage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Логинимся")
     public HomePage login(String login, String password) {
         this.loginInput.sendKeys(login);
         this.passwordInput.sendKeys(password);

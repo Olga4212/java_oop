@@ -1,5 +1,6 @@
 package ru.geekbrains.main.site.at.block;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -127,21 +128,25 @@ public class Search {
         return this;
     }
 
+    @Step("Проверка количества записей в блоге")
     public Search checkBlogsCount(int greaterThan) {
         wait10second.until(Conditions.innerHtmlIsGreater(this.blogs_count, greaterThan));
         return this;
     }
 
+    @Step ("Проверка количества форумов")
     public Search checkForumsCountIsNotEqual(int value) {
         wait10second.until(Conditions.innerHtmlIsNotEquals(this.forums_count, value));
         return this;
     }
 
+    @Step("Проверка количества тестов")
     public Search checkTestsCountIsNotEqual(int value) {
         wait10second.until(Conditions.innerHtmlIsNotEquals(this.tests_count, value));
         return this;
     }
 
+    @Step("Проверка количества вебинаров")
     public Search checkFirstWebinarIs(String name) {
         wait10second.until(ExpectedConditions.textToBePresentInElement(this.first_webinar, name));
         return this;

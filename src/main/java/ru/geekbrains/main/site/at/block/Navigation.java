@@ -37,7 +37,7 @@ public class Navigation {
         PageFactory.initElements(driver, this);
     }
 
-    //@Step("нажатие кнопки '{name}'")
+    @Step("нажатие кнопки '{name}'")
     public HomePage clickButton(String name) {
         switch (name) {
             case "Курсы": {
