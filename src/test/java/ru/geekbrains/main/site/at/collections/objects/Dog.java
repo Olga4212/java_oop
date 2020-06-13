@@ -20,6 +20,7 @@ public class Dog {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dog dog = (Dog) o;
+        // return Objects.hashCode(o) == Objects.hashCode(this);
         return age == dog.age &&
                 weight == dog.weight &&
                 gender == dog.gender &&

@@ -14,8 +14,10 @@ public class CollectionsOfExample {
         dogs.add(new Dog(678));
         dogs.add(new Dog(345));
 
+        Dog dog1 = new Dog(345);
+        boolean dog1existsInDogs = dogs.contains(dog1);
+        System.out.println(dog1existsInDogs);
 
-        System.out.println(dogs.contains(new Dog(345)));
         System.out.println(dogs.contains(new Dog(543)));
     }
 }
