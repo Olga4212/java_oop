@@ -6,29 +6,31 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.geekbrains.main.site.at.page.HomePage;
+import ru.geekbrains.main.site.at.block.Navigation.ButtonName;
+import ru.geekbrains.main.site.at.page.content.HomePage;
 import ru.geekbrains.main.site.at.site.base.BaseTest;
 
+import java.beans.EventSetDescriptor;
 import java.util.stream.Stream;
 
-@Feature("Здесь Название тестируемого функционала")
-@Story("Здесь Название Тестового-набора")
+@Feature("Навигация")
+@Story("Переход на страницу")
 @DisplayName("Проверка Навигации")
 public class NavigationTest extends BaseTest {
 
-    public static Stream<String> stringProviderNotPopUp() {
+    public static Stream<ButtonName> stringProviderNotPopUp() {
         return Stream.of(
-                "Вебинары",
-                "Форум",
-                "Тесты",
-                "Карьера"
+                ButtonName.EVENTS,
+                ButtonName.TOPICS,
+                ButtonName.TESTS,
+                ButtonName.CAREER
         );
     }
 
-    public static Stream<String> stringProviderPopUp() {
+    public static Stream<ButtonName> stringProviderPopUp() {
         return Stream.of(
-                "Блог"//,
-                //"Курсы"
+                ButtonName.POSTS//,
+                //ButtonName.COURSES
         );
     }
 
@@ -36,20 +38,20 @@ public class NavigationTest extends BaseTest {
     @DisplayName("Нажатие на элемент навигации")
     @ParameterizedTest(name = "{index} => Нажатие на: {0}")
     @MethodSource("stringProviderNotPopUp")
-    public void checkNavigationNotPopUp(String name) {
+    public void checkNavigationNotPopUp(ButtonName button) {
         new HomePage(driver)
-                .getNavigation().clickButton(name)
-                .checkNamePage(name);
+                .getNavigation().clickButton(button)
+                .checkNamePage(button.getText());
     }
 
     @Description("Тесты которые проверяют функционал Pop-UP")
     @DisplayName("Нажатие на элемент навигации")
     @ParameterizedTest(name = "{index} => Нажатие на: {0}")
     @MethodSource("stringProviderPopUp")
-    public void checkNavigationPopUp(String name) {
+    public void checkNavigationPopUp(ButtonName button) {
         new HomePage(driver)
-                .getNavigation().clickButton(name)
+                .getNavigation().clickButton(button)
                 .closedPopUp()
-                .checkNamePage(name);
+                .checkNamePage(button.getText());
     }
 }

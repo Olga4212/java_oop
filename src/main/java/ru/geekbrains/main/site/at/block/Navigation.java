@@ -1,12 +1,18 @@
 package ru.geekbrains.main.site.at.block;
 
+import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ru.geekbrains.main.site.at.ButtonNotFoundException;
-import ru.geekbrains.main.site.at.page.HomePage;
+import ru.geekbrains.main.site.at.page.content.HomePage;
+@Feature("Навигация")
+@Story("Переход на страницу")
+@DisplayName("Проверка навигации")
 
 public class Navigation {
 
@@ -38,35 +44,59 @@ public class Navigation {
     }
 
     @Step("нажатие кнопки '{name}'")
-    public HomePage clickButton(String name) {
+    public HomePage clickButton(ButtonName name) {
         switch (name) {
-            case "Курсы": {
+            case COURSES: {
                 buttonCourses.click();
+                break;
             }
-            case "Вебинары": {
+            case EVENTS: {
                 buttonEvents.click();
                 break;
             }
-            case "Форум": {
+            case TOPICS:{
                 buttonTopics.click();
                 break;
             }
-            case "Блог": {
+
+            case POSTS:{
                 buttonPosts.click();
                 break;
             }
-            case "Тесты": {
+
+            case TESTS:{
                 buttonTests.click();
                 break;
             }
-            case "Карьера": {
+
+            case CAREER:{
                 buttonCareer.click();
                 break;
             }
-            default: {
-                throw new ButtonNotFoundException("Кнопка не найдена! Нет кнопки с именем: " + name);
-            }
+
         }
+
         return homePage;
     }
+
+    public enum ButtonName {
+        COURSES ("Курсы"),
+        EVENTS("Вебинары"),
+        TOPICS ("Форум"),
+        POSTS("Блог"),
+        TESTS("Тесты"),
+        CAREER("Карьера");
+
+        private String text;
+        ButtonName(String text){
+            this.text=text;
+        }
+        public String getText(){
+            return text;
+
+        }
+    }
+
 }
+
+

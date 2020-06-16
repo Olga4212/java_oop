@@ -1,7 +1,5 @@
 package ru.geekbrains.main.site.at.site;
 
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.geekbrains.main.site.at.page.AuthorizationPage;
