@@ -6,17 +6,16 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.geekbrains.main.site.at.block.Navigation.ButtonName;
+import ru.geekbrains.main.site.at.block.LeftNavigation.ButtonName;
 import ru.geekbrains.main.site.at.page.content.HomePage;
 import ru.geekbrains.main.site.at.site.base.BaseTest;
 
-import java.beans.EventSetDescriptor;
 import java.util.stream.Stream;
 
 @Feature("Навигация")
 @Story("Переход на страницу")
 @DisplayName("Проверка Навигации")
-public class NavigationTest extends BaseTest {
+public class LeftNavigationTest extends BaseTest {
 
     public static Stream<ButtonName> stringProviderNotPopUp() {
         return Stream.of(
@@ -29,8 +28,8 @@ public class NavigationTest extends BaseTest {
 
     public static Stream<ButtonName> stringProviderPopUp() {
         return Stream.of(
-                ButtonName.POSTS//,
-                //ButtonName.COURSES
+                ButtonName.POSTS,
+                ButtonName.COURSES
         );
     }
 
@@ -40,7 +39,7 @@ public class NavigationTest extends BaseTest {
     @MethodSource("stringProviderNotPopUp")
     public void checkNavigationNotPopUp(ButtonName button) {
         new HomePage(driver)
-                .getNavigation().clickButton(button)
+                .getLeftNavigation().clickButton(button)
                 //.checkNamePage(button.getText())
         ;
     }
@@ -51,7 +50,7 @@ public class NavigationTest extends BaseTest {
     @MethodSource("stringProviderPopUp")
     public void checkNavigationPopUp(ButtonName button) {
         new HomePage(driver)
-                .getNavigation().clickButton(button)
+                .getLeftNavigation().clickButton(button)
                 .closedPopUp()
                 //.checkNamePage(button.getText())
         ;

@@ -8,13 +8,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ru.geekbrains.main.site.at.BasePage;
 import ru.geekbrains.main.site.at.ButtonNotFoundException;
+import ru.geekbrains.main.site.at.TabNotFoundException;
+import ru.geekbrains.main.site.at.page.content.CoursePage;
 import ru.geekbrains.main.site.at.page.content.HomePage;
 @Feature("Навигация")
 @Story("Переход на страницу")
 @DisplayName("Проверка навигации")
 
-public class Navigation {
+public class LeftNavigation {
 
     @FindBy(css = "[id='nav'] [href='/courses']")
     private WebElement buttonCourses;
@@ -35,48 +38,52 @@ public class Navigation {
     private WebElement buttonCareer;
 
     private WebDriver driver;
-    private HomePage homePage;
 
-    public Navigation(WebDriver driver, HomePage homePage) {
+    public LeftNavigation(WebDriver driver) {
         this.driver = driver;
-        this.homePage = homePage;
         PageFactory.initElements(driver, this);
     }
 
     @Step("нажатие кнопки '{name}'")
-    public HomePage clickButton(ButtonName name) {
+    public BasePage clickButton(ButtonName name) {
+        BasePage page = null;
+
         switch (name) {
             case COURSES: {
                 buttonCourses.click();
-                break;
+                return new CoursePage(this.driver);
             }
             case EVENTS: {
                 buttonEvents.click();
-                break;
+                // todo необходимо реализовать страницу
+                return new HomePage(this.driver);
             }
             case TOPICS:{
                 buttonTopics.click();
-                break;
+                // todo необходимо реализовать страницу
+                return new HomePage(this.driver);
             }
 
             case POSTS:{
                 buttonPosts.click();
-                break;
+                // todo необходимо реализовать страницу
+                return new HomePage(this.driver);
             }
 
             case TESTS:{
                 buttonTests.click();
-                break;
+                // todo необходимо реализовать страницу
+                return new HomePage(this.driver);
             }
 
             case CAREER:{
                 buttonCareer.click();
-                break;
+                // todo необходимо реализовать страницу
+                return new HomePage(this.driver);
             }
 
         }
-
-        return homePage;
+        throw new TabNotFoundException();
     }
 
     public enum ButtonName {

@@ -2,6 +2,7 @@ package ru.geekbrains.main.site.at;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class BasePage {
     protected WebDriver driver;
 
-    @FindBy(css = "div button svg [class = 'svg-icon icon-popup-close-button']")
+    @FindBy(css = "div button svg[class='svg-icon icon-popup-close-button ']")
     private WebElement buttonPopUpClosed;
 
     protected final WebDriverWait wait10second;
