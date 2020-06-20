@@ -5,22 +5,37 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ru.geekbrains.main.site.at.page.content.HomePage;
+import ru.geekbrains.main.site.at.BasePage;
+import ru.geekbrains.main.site.at.page.content.SearchPage;
 
-public class Header {
+public class Header extends BasePage {
     @FindBy(css = "h2[class=\"gb-header__title\"]")
     private WebElement textNamePage;
-    private WebDriver driver;
-    public Header (WebDriver driver){
-        this.driver=driver;
+
+    @FindBy(css = "#top-menu .show-search-form svg")
+    private WebElement buttonSearch;
+
+    @FindBy(css = "[class='search-panel__search-field']")
+    private WebElement inputSearch;
+
+    public Header(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
     }
-    @Step ("Проверка отображения страницы {expectedNamePage}")
-    public HomePage checkNamePage(String expectedNamePage) {
+
+    @Step("Проверка отображения страницы {expectedNamePage}")
+    public Header checkNamePage(String expectedNamePage) {
         wait10second.until(ExpectedConditions.textToBePresentInElement(textNamePage, expectedNamePage));
         return this;
     }
+
+    @Step("Поиск по сайту по слову {searchText}")
+    public SearchPage searchInSite(String searchText) {
+        buttonSearch.click();
+        inputSearch.sendKeys(searchText);
+        return new SearchPage(driver);
+    }
+
 
 }

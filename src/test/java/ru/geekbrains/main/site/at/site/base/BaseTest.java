@@ -23,9 +23,11 @@ public class BaseTest {
         options.addArguments("--disable-popup-blocking");
         options.setExperimentalOption("excludeSwitches", Arrays.asList("disable-popup-blocking"));
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+
+        driver.get("https://geekbrains.ru/career");
 
         wait10second = new WebDriverWait(driver, 10);
     }
