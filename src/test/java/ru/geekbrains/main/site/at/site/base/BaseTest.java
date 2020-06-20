@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-public class BaseTest {
+public abstract class BaseTest {
     public WebDriver driver;
     public WebDriverWait wait10second;
 

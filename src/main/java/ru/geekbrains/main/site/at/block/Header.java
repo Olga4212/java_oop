@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ru.geekbrains.main.site.at.BasePage;
+import ru.geekbrains.main.site.at.condition.Conditions;
 import ru.geekbrains.main.site.at.page.content.SearchPage;
 
 public class Header extends BasePage {
@@ -18,6 +19,10 @@ public class Header extends BasePage {
 
     @FindBy(css = "[class='search-panel__search-field']")
     private WebElement inputSearch;
+
+    @FindBy(css = "img.gb-top-menu__user-avatar.user-avatar-image")
+    private WebElement userAvatar;
+
 
     public Header(WebDriver driver) {
         super(driver);
@@ -37,5 +42,9 @@ public class Header extends BasePage {
         return new SearchPage(driver);
     }
 
-
+    @Step("Проверка того, что авторизовались")
+    public Header checkAuthorized() {
+        wait10second.until(Conditions.exists(this.userAvatar));
+        return this;
+    }
 }

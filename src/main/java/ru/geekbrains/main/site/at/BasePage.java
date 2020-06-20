@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BasePage {
+public abstract class BasePage {
     protected WebDriver driver;
 
     @FindBy(css = "div button svg [class = 'svg-icon icon-popup-close-button']")

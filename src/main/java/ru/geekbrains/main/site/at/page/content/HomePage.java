@@ -61,10 +61,5 @@ public class HomePage extends BasePage {
 //        this.buttonPopUpClosed.click();
 //        return this;
 //    }
-//
-//    @Step("Проверка того, что авторизовались")
-//    public HomePage checkAuthorized() {
-//        wait10second.until(Conditions.exists(this.userAvatar));
-//        return this;
-//    }
+
 
